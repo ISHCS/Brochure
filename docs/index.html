@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ISHCS Brochure - AI-Powered Healthcare System</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
@@ -14,10 +14,14 @@
             --tech-blue: #001F3F;
             --tech-dark: #0A0A0A;
             --tech-accent: #00BFFF;
+            --panel-padding: min(5vw, 30px);
+            --mobile-breakpoint: 768px;
         }
         
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
         body {
@@ -25,14 +29,14 @@
             line-height: 1.6;
             color: #333;
             background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px;
+            padding: min(4vw, 20px);
+            min-height: 100vh;
         }
         
         .language-selector {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            top: min(2vw, 15px);
+            right: min(2vw, 15px);
             z-index: 1000;
         }
         
@@ -40,29 +44,41 @@
             background: var(--tech-dark);
             color: var(--gold-light);
             border: 1px solid var(--gold-primary);
-            padding: 8px 15px;
+            padding: min(1.5vw, 8px) min(3vw, 15px);
             border-radius: 20px;
-            font-size: 14px;
+            font-size: clamp(12px, 3vw, 14px);
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #language-select:hover {
+            background: var(--tech-blue);
         }
         
         .brochure {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: min(4vw, 25px);
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
         
         .panel {
             background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            padding: 25px;
+            padding: var(--panel-padding);
             page-break-inside: avoid;
             border: 1px solid rgba(255, 215, 0, 0.2);
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
         }
         
         .panel::before {
@@ -80,7 +96,7 @@
             background: linear-gradient(135deg, var(--tech-dark), var(--tech-blue));
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: min(8vw, 50px) var(--panel-padding);
             border: 1px solid var(--gold-primary);
             position: relative;
             overflow: hidden;
@@ -99,6 +115,7 @@
         h1, h2, h3, h4 {
             margin-top: 0;
             color: var(--gold-primary);
+            line-height: 1.3;
         }
         
         .header-panel h1, .header-panel h2 {
@@ -109,43 +126,44 @@
         }
         
         h1 {
-            font-size: clamp(28px, 5vw, 42px);
-            margin-bottom: 15px;
+            font-size: clamp(28px, 6vw, 42px);
+            margin-bottom: min(3vw, 15px);
             font-weight: 800;
             letter-spacing: 1px;
         }
         
         h2 {
-            font-size: clamp(22px, 4vw, 28px);
+            font-size: clamp(22px, 4.5vw, 28px);
             border-bottom: 2px solid var(--gold-primary);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            padding-bottom: min(2vw, 12px);
+            margin-bottom: min(4vw, 25px);
             font-weight: 700;
         }
         
         h3 {
-            font-size: clamp(18px, 3vw, 22px);
+            font-size: clamp(18px, 3.5vw, 22px);
             color: var(--gold-light);
-            margin-bottom: 15px;
+            margin-bottom: min(3vw, 15px);
         }
         
         p, li {
             color: #e0e0e0;
-            font-size: clamp(14px, 2.5vw, 16px);
+            font-size: clamp(14px, 3vw, 16px);
+            margin-bottom: min(3vw, 15px);
         }
         
         .feature-icon {
             font-size: clamp(36px, 8vw, 48px);
             color: var(--gold-primary);
-            margin-bottom: 15px;
+            margin-bottom: min(4vw, 20px);
             text-shadow: 0 0 15px rgba(255,215,0,0.4);
         }
         
         .benefit-box {
             background: rgba(0, 31, 63, 0.5);
             border-left: 4px solid var(--gold-primary);
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: min(4vw, 20px);
+            margin-bottom: min(4vw, 20px);
             border-radius: 0 8px 8px 0;
             position: relative;
             overflow: hidden;
@@ -163,27 +181,27 @@
         }
         
         .stat-highlight {
-            font-size: clamp(24px, 6vw, 32px);
+            font-size: clamp(24px, 7vw, 32px);
             font-weight: 800;
             color: var(--gold-primary);
             display: block;
-            margin: 10px 0;
+            margin: min(3vw, 15px) 0;
             text-shadow: 0 0 10px rgba(255,215,0,0.3);
         }
         
         .contact-info {
             text-align: center;
-            margin-top: 20px;
-            font-size: clamp(14px, 3vw, 16px);
+            margin-top: min(6vw, 30px);
+            font-size: clamp(14px, 3.5vw, 16px);
             color: var(--gold-light);
         }
         
         ul {
-            padding-left: 20px;
+            padding-left: min(5vw, 20px);
         }
         
         li {
-            margin-bottom: 8px;
+            margin-bottom: min(2vw, 10px);
             position: relative;
         }
         
@@ -209,31 +227,33 @@
             pointer-events: none;
         }
         
+        /* Improved mobile layout */
         @media (max-width: 768px) {
             .brochure {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: min(3vw, 15px);
             }
             
             .panel {
-                padding: 20px;
+                padding: min(4vw, 20px);
             }
             
             .header-panel {
-                padding: 30px 15px;
+                padding: min(6vw, 30px) min(4vw, 15px);
             }
             
             .language-selector {
-                top: 5px;
-                right: 5px;
+                top: min(1vw, 5px);
+                right: min(1vw, 5px);
             }
             
             #language-select {
-                padding: 6px 12px;
-                font-size: 12px;
+                padding: min(1vw, 6px) min(2vw, 12px);
+                font-size: clamp(11px, 3vw, 12px);
             }
         }
         
+        /* Print styles */
         @media print {
             body {
                 padding: 0;
@@ -244,16 +264,34 @@
                 border: 1px solid var(--gold-primary);
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                page-break-inside: avoid;
             }
             .language-selector {
                 display: none;
             }
+            .brochure {
+                display: block;
+            }
+            .panel {
+                margin-bottom: 20px;
+            }
+        }
+        
+        /* Accessibility improvements */
+        a:focus, button:focus, select:focus {
+            outline: 2px solid var(--gold-primary);
+            outline-offset: 2px;
+        }
+        
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body>
     <div class="language-selector">
-        <select id="language-select">
+        <select id="language-select" aria-label="Select language">
             <option value="en">English</option>
             <option value="am">አማርኛ (Amharic)</option>
             <option value="ar">العربية (Arabic)</option>
@@ -268,7 +306,7 @@
             <div class="tech-pattern"></div>
             <h1 data-translate="title">ISHCS</h1>
             <h2 data-translate="subtitle">INTEGRATED SMART HEALTHCARE SYSTEM</h2>
-            <p style="font-size: clamp(16px, 3vw, 18px); max-width: 800px; margin: 0 auto;" data-translate="tagline">AI-Powered Clinical Automation Platform with Advanced Nurse Assistance</p>
+            <p style="font-size: clamp(16px, 3.5vw, 18px); max-width: 800px; margin: 0 auto;" data-translate="tagline">AI-Powered Clinical Automation Platform with Advanced Nurse Assistance</p>
         </div>
         
         <!-- About Panel -->
@@ -295,19 +333,19 @@
             <div class="tech-pattern"></div>
             <h2 data-translate="features-title">Core Technologies</h2>
             
-            <div class="feature-icon">🤖</div>
+            <div class="feature-icon" aria-hidden="true">🤖</div>
             <h3 data-translate="feature1-title">Predictive AI Engine</h3>
             <p data-translate="feature1-text">Deep learning algorithms analyze real-time vitals and historical data to anticipate clinical needs before they become critical.</p>
             
-            <div class="feature-icon">👁️</div>
+            <div class="feature-icon" aria-hidden="true">👁️</div>
             <h3 data-translate="feature2-title">Smart Monitoring</h3>
             <p data-translate="feature2-text">IoT-enabled bedside devices feed data to our centralized neural network for comprehensive patient surveillance.</p>
             
-            <div class="feature-icon">🎤</div>
+            <div class="feature-icon" aria-hidden="true">🎤</div>
             <h3 data-translate="feature3-title">Voice Interface</h3>
             <p data-translate="feature3-text">Natural language processing enables hands-free communication for patients and staff through secure voice commands.</p>
             
-            <div class="feature-icon">📊</div>
+            <div class="feature-icon" aria-hidden="true">📊</div>
             <h3 data-translate="feature4-title">Data Analytics</h3>
             <p data-translate="feature4-text">Blockchain-secured clinical data warehouse with real-time visualization dashboards for administrators.</p>
         </div>
@@ -405,12 +443,12 @@
         <div class="panel header-panel" style="grid-column: 1 / -1;">
             <div class="tech-pattern"></div>
             <h2 data-translate="deploy-title">DEPLOY THE FUTURE OF HEALTHCARE</h2>
-            <p style="font-size: clamp(16px, 3vw, 20px); margin-bottom: 20px;" data-translate="roi-text">ISHCS delivers measurable ROI within 6-9 months while transforming patient outcomes</p>
+            <p style="font-size: clamp(16px, 3.5vw, 20px); margin-bottom: min(4vw, 20px);" data-translate="roi-text">ISHCS delivers measurable ROI within 6-9 months while transforming patient outcomes</p>
             
             <div class="contact-info">
-                <p style="font-size: clamp(16px, 3vw, 18px);"><strong data-translate="company-name">RAJI TECHNOLOGY</strong></p>
-                <p style="font-size: clamp(14px, 3vw, 16px); color: var(--gold-light);" data-translate="contact-info">+251913395143 | Addis Ababa, Ethiopia</p>
-                <p style="margin-top: 15px;" data-translate="footer-text">Powered by AI • Secured by Blockchain • Validated by Clinical Research</p>
+                <p style="font-size: clamp(16px, 3.5vw, 18px);"><strong data-translate="company-name">RAJI TECHNOLOGY</strong></p>
+                <p style="font-size: clamp(14px, 3.5vw, 16px); color: var(--gold-light);" data-translate="contact-info">+251913395143 | Addis Ababa, Ethiopia</p>
+                <p style="margin-top: min(4vw, 15px);" data-translate="footer-text">Powered by AI • Secured by Blockchain • Validated by Clinical Research</p>
             </div>
         </div>
     </div>
@@ -509,12 +547,12 @@
                 'feature3-title': 'የድምፅ በይነገጽ',
                 'feature3-text': 'የተፈጥሮ ቋንቋ ሂደት ለታካሞች እና ለሰራተኞች የድምፅ ትዕዛዞችን በመጠቀም ያለ እጅ ግንኙነት ያስችላል።',
                 'feature4-title': 'የውሂብ ትንተና',
-                'feature4-text': 'ብሎክቼይን-የተጠበቀ የክሊኒካዊ ውሂብ መጋዘን ከቀጥታ የማየት ዳሽቦርዶች ለአስተዳዳሪዎች።',
+                'feature4-text': 'ብሎክቼይን-የተጠበቀ የክሊኒካዊ ውሂብ መጋዘን ከቀጥታ �ማየት ዳሽቦርዶች ለአስተዳዳሪዎች።',
                 'architecture-title': 'የስርዓት አርክቴክቸር',
                 'step1-title': '1. የውሂብ ስብሰባ',
                 'step1-text': 'ከ IoT መሳሪያዎች፣ EHR ስርዓቶች እና ከሰራተኞች ግንኙነቶች የሚመጡ ብዙ ዓይነት ግብዓቶች የታካሚ መግለጫ ይፈጥራሉ።',
                 'step2-title': '2. AI ማቀነባበር',
-                'step2-text': 'የእኛ የባለቤትነት የነርቭ �ኔትወርክ ውሂብ ፍሰቶችን በመተንተን ያልተለመዱ ነገሮችን ያገኛል እና ክሊኒካዊ ፍላጎቶችን ያስተንትናል።',
+                'step2-text': 'የእኛ የባለቤትነት የነርቭ ኔትወርክ ውሂብ ፍሰቶችን በመተንተን ያልተለመዱ ነገሮችን ያገኛል እና ክሊኒካዊ ፍላጎቶችን ያስተንትናል።',
                 'step3-title': '3. ብልህ መስተካከል',
                 'step3-text': 'የውስጥ የሆነ ስልተ-ቀመር ማንቂያዎችን ያስቀምጣል እና ለተስማሚው የክሊኒካዊ ኪል ያስተላልፋል።',
                 'response-text': 'በክሊኒካዊ ሙከራዎች ውስጥ የምላሽ ጊዜ ማሻሻያ',
@@ -541,7 +579,7 @@
                 'data-title': 'የውሂብ አስተውሎት',
                 'data-text': 'በቀጥታ የአሠራር ትንተና ከማሽን ትምህርት ግንዛቤዎች ለቀጣይ ማሻሻያ።',
                 'scalable-title': 'ሊሰፋ የሚችል መድረክ',
-                'scalable-text': 'ሞዱላር አርክቴክቸር ከ ICU እስከ ከተማ ውጭ ክሊኒኮች ድረስ ለማንኛውም የክሊኒካዊ አካባቢ የሚስማማ።',
+                'scalable-text': 'ሞዱሻር አርክቴክቸር ከ ICU እስከ ከተማ ውጭ ክሊኒኮች ድረስ ለማንኛውም የክሊኒካዊ አካባቢ የሚስማማ።',
                 'validation-title': 'የክሊኒካዊ ማረጋገጫ',
                 'kenya-title': 'የኬንያ ICU ጥናት (2023)',
                 'kenya1': '22% የሞት መጠን መቀነስ',
@@ -556,7 +594,7 @@
                 'ethiopia2': '92% የታካሚ እርካታ',
                 'ethiopia3': 'በጤና ሚኒስቴር የተፈቀደ',
                 'deploy-title': 'የወደፊቱን የጤና አገልግሎት ይጀምሩ',
-                'roi-text': 'ISHCS በ6-9 �ራት ውስጥ የሚለካ የኢንቨስትመንት መመለስ ያመጣል የታካሚ ውጤቶችን በማሻሻል',
+                'roi-text': 'ISHCS በ6-9 ወራት ውስጥ የሚለካ የኢንቨስትመንት መመለስ ያመጣል የታካሚ ውጤቶችን በማሻሻል',
                 'company-name': 'ራጂ ቴክኖሎጂ',
                 'contact-info': '+251913395143 | አዲስ አበባ፣ ኢትዮጵያ',
                 'footer-text': 'በ AI የሚሰራ • በብሎክቼይን የተጠበቀ • በክሊኒካዊ ምርመራ የተረጋገጠ'
@@ -799,6 +837,14 @@
 
         // Initialize with default language
         updateContent('en');
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            // This ensures proper rendering on orientation changes
+            requestAnimationFrame(() => {
+                // Any responsive adjustments can go here
+            });
+        });
     </script>
 </body>
 </html>
