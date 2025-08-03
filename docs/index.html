@@ -16,20 +16,23 @@
             --tech-accent: #00BFFF;
         }
         
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f5f5f5;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin: 0;
             padding: 20px;
         }
         
         .language-selector {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 10px;
+            right: 10px;
             z-index: 1000;
         }
         
@@ -45,15 +48,17 @@
         
         .brochure {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .panel {
             background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            padding: 30px;
+            padding: 25px;
             page-break-inside: avoid;
             border: 1px solid rgba(255, 215, 0, 0.2);
             position: relative;
@@ -75,7 +80,7 @@
             background: linear-gradient(135deg, var(--tech-dark), var(--tech-blue));
             color: white;
             text-align: center;
-            padding: 50px 30px;
+            padding: 40px 20px;
             border: 1px solid var(--gold-primary);
             position: relative;
             overflow: hidden;
@@ -104,42 +109,43 @@
         }
         
         h1 {
-            font-size: 42px;
+            font-size: clamp(28px, 5vw, 42px);
             margin-bottom: 15px;
             font-weight: 800;
             letter-spacing: 1px;
         }
         
         h2 {
-            font-size: 28px;
+            font-size: clamp(22px, 4vw, 28px);
             border-bottom: 2px solid var(--gold-primary);
-            padding-bottom: 12px;
-            margin-bottom: 25px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
             font-weight: 700;
         }
         
         h3 {
-            font-size: 22px;
+            font-size: clamp(18px, 3vw, 22px);
             color: var(--gold-light);
             margin-bottom: 15px;
         }
         
         p, li {
             color: #e0e0e0;
+            font-size: clamp(14px, 2.5vw, 16px);
         }
         
         .feature-icon {
-            font-size: 48px;
+            font-size: clamp(36px, 8vw, 48px);
             color: var(--gold-primary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-shadow: 0 0 15px rgba(255,215,0,0.4);
         }
         
         .benefit-box {
             background: rgba(0, 31, 63, 0.5);
             border-left: 4px solid var(--gold-primary);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             border-radius: 0 8px 8px 0;
             position: relative;
             overflow: hidden;
@@ -157,18 +163,18 @@
         }
         
         .stat-highlight {
-            font-size: 32px;
+            font-size: clamp(24px, 6vw, 32px);
             font-weight: 800;
             color: var(--gold-primary);
             display: block;
-            margin: 15px 0;
+            margin: 10px 0;
             text-shadow: 0 0 10px rgba(255,215,0,0.3);
         }
         
         .contact-info {
             text-align: center;
-            margin-top: 30px;
-            font-size: 16px;
+            margin-top: 20px;
+            font-size: clamp(14px, 3vw, 16px);
             color: var(--gold-light);
         }
         
@@ -177,7 +183,7 @@
         }
         
         li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             position: relative;
         }
         
@@ -201,6 +207,31 @@
                 radial-gradient(circle at 25% 25%, var(--gold-primary) 0%, transparent 20%),
                 radial-gradient(circle at 75% 75%, var(--gold-primary) 0%, transparent 20%);
             pointer-events: none;
+        }
+        
+        @media (max-width: 768px) {
+            .brochure {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .panel {
+                padding: 20px;
+            }
+            
+            .header-panel {
+                padding: 30px 15px;
+            }
+            
+            .language-selector {
+                top: 5px;
+                right: 5px;
+            }
+            
+            #language-select {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
         }
         
         @media print {
@@ -237,7 +268,7 @@
             <div class="tech-pattern"></div>
             <h1 data-translate="title">ISHCS</h1>
             <h2 data-translate="subtitle">INTEGRATED SMART HEALTHCARE SYSTEM</h2>
-            <p style="font-size: 18px; max-width: 800px; margin: 0 auto;" data-translate="tagline">AI-Powered Clinical Automation Platform with Advanced Nurse Assistance</p>
+            <p style="font-size: clamp(16px, 3vw, 18px); max-width: 800px; margin: 0 auto;" data-translate="tagline">AI-Powered Clinical Automation Platform with Advanced Nurse Assistance</p>
         </div>
         
         <!-- About Panel -->
@@ -374,12 +405,12 @@
         <div class="panel header-panel" style="grid-column: 1 / -1;">
             <div class="tech-pattern"></div>
             <h2 data-translate="deploy-title">DEPLOY THE FUTURE OF HEALTHCARE</h2>
-            <p style="font-size: 20px; margin-bottom: 30px;" data-translate="roi-text">ISHCS delivers measurable ROI within 6-9 months while transforming patient outcomes</p>
+            <p style="font-size: clamp(16px, 3vw, 20px); margin-bottom: 20px;" data-translate="roi-text">ISHCS delivers measurable ROI within 6-9 months while transforming patient outcomes</p>
             
             <div class="contact-info">
-                <p style="font-size: 18px;"><strong data-translate="company-name">RAJI TECHNOLOGY</strong></p>
-                <p style="font-size: 16px; color: var(--gold-light);" data-translate="contact-info">+251913395143 | Addis Ababa, Ethiopia</p>
-                <p style="margin-top: 20px;" data-translate="footer-text">Powered by AI • Secured by Blockchain • Validated by Clinical Research</p>
+                <p style="font-size: clamp(16px, 3vw, 18px);"><strong data-translate="company-name">RAJI TECHNOLOGY</strong></p>
+                <p style="font-size: clamp(14px, 3vw, 16px); color: var(--gold-light);" data-translate="contact-info">+251913395143 | Addis Ababa, Ethiopia</p>
+                <p style="margin-top: 15px;" data-translate="footer-text">Powered by AI • Secured by Blockchain • Validated by Clinical Research</p>
             </div>
         </div>
     </div>
@@ -483,9 +514,9 @@
                 'step1-title': '1. የውሂብ ስብሰባ',
                 'step1-text': 'ከ IoT መሳሪያዎች፣ EHR ስርዓቶች እና ከሰራተኞች ግንኙነቶች የሚመጡ ብዙ ዓይነት ግብዓቶች የታካሚ መግለጫ ይፈጥራሉ።',
                 'step2-title': '2. AI ማቀነባበር',
-                'step2-text': 'የእኛ የባለቤትነት የነርቭ ኔትወርክ ውሂብ ፍሰቶችን በመተንተን ያልተለመዱ ነገሮችን ያገኛል እና ክሊኒካዊ ፍላጎቶችን ያስተንትናል።',
+                'step2-text': 'የእኛ የባለቤትነት የነርቭ �ኔትወርክ ውሂብ ፍሰቶችን በመተንተን ያልተለመዱ ነገሮችን ያገኛል እና ክሊኒካዊ ፍላጎቶችን ያስተንትናል።',
                 'step3-title': '3. ብልህ መስተካከል',
-                'step3-text': 'የውስጥ የሆነ ስልተ-ቀመር ማንቂያዎችን ያስቀምጣል እና ለተስማሚው የክሊኒካዊ �ኪል ያስተላልፋል።',
+                'step3-text': 'የውስጥ የሆነ ስልተ-ቀመር ማንቂያዎችን ያስቀምጣል እና ለተስማሚው የክሊኒካዊ ኪል ያስተላልፋል።',
                 'response-text': 'በክሊኒካዊ ሙከራዎች ውስጥ የምላሽ ጊዜ ማሻሻያ',
                 'outcomes-title': 'የክሊኒካዊ ውጤቶች',
                 'safety-title': 'የመድሃኒት ደህንነት',
@@ -525,7 +556,7 @@
                 'ethiopia2': '92% የታካሚ እርካታ',
                 'ethiopia3': 'በጤና ሚኒስቴር የተፈቀደ',
                 'deploy-title': 'የወደፊቱን የጤና አገልግሎት ይጀምሩ',
-                'roi-text': 'ISHCS በ6-9 ወራት ውስጥ የሚለካ የኢንቨስትመንት መመለስ ያመጣል የታካሚ ውጤቶችን በማሻሻል',
+                'roi-text': 'ISHCS በ6-9 �ራት ውስጥ የሚለካ የኢንቨስትመንት መመለስ ያመጣል የታካሚ ውጤቶችን በማሻሻል',
                 'company-name': 'ራጂ ቴክኖሎጂ',
                 'contact-info': '+251913395143 | አዲስ አበባ፣ ኢትዮጵያ',
                 'footer-text': 'በ AI የሚሰራ • በብሎክቼይን የተጠበቀ • በክሊኒካዊ ምርመራ የተረጋገጠ'
